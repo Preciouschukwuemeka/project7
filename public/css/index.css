@@ -2,12 +2,14 @@ body {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   color: #3f4850;
+  background-color: red;
 }
 
 h2 {
   font-size: 2em;
   margin: 52px 0 40px;
   text-transform: capitalize;
+  color: yellow;
 }
 
 ul {
@@ -23,26 +25,28 @@ a {
   max-width: 460px;
   display: flex;
   margin: 0 auto 32px;
+  
 }
 
 .search-form button {
   outline: none;
-  background-color: #438bbd;
+  background-color: blue;
   border: none;
   padding: 0px 15px;
-  border-radius: 0 0.35em 0.35em 0;
+  border-radius: 25%;
   cursor: pointer;
 }
 
 input {
   font-size: 1em;
   width: 100%;
-  background-color: #edeff0;
+  background-color: black;
   padding: 10px 15px;
   border: 3px solid #d7dbdf;
   border-right: none;
-  border-radius: 0.35em 0 0 0.35em;
+  border-radius: 25%;
   outline: none;
+  color: yellow;
 }
 
 .main-nav li {
@@ -53,15 +57,16 @@ input {
 .main-nav a {
   display: block;
   background: #438bbd;
-  border-radius: 3px;
+  border-radius: 15px;
   padding: 5px;
-  color: #fff;
+  color:black;
 }
 
 .main-nav .active,
 .main-nav a:hover,
 .search-form button:hover {
-  background-color: #275270;
+  background-color:gold;
+  border-radius: 55%;
 }
 
 .photo-container ul {
@@ -77,6 +82,7 @@ input {
   height: 165px;
   overflow: hidden;
   margin-bottom: 15px;
+  border-radius: 15px;
 }
 
 .photo-container ul img {
