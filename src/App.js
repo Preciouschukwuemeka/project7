@@ -84,7 +84,7 @@ class App extends Component {
 
 
 
- // Creating Search Field
+ // Search Field
 
   performSearch = (query) => {
     this.setState( prevState => ({
