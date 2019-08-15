@@ -82,7 +82,7 @@ input {
   height: 165px;
   overflow: hidden;
   margin-bottom: 15px;
-  border-radius: 15px;
+  border-radius: 25%;
 }
 
 .photo-container ul img {

@@ -6,14 +6,21 @@ import apiKey from './config';
 
 
 
-//Component Imports
+
+// Importing Components.
+
 import Header from './Components/Header';
-import GalleryForm from './Components/GalleryForm';
+import PhotoList from './Components/PhotoList';
 import NotFound from './Components/NotFound';
 
-//creates the main App component
+
+
+
+
+
+//creating the main App Component
+
 class App extends Component {
-//https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
   state = {
     imgs: [],
     query: "",
@@ -23,9 +30,14 @@ class App extends Component {
     loading: true
   }
 
-  //when the component is first mounted, axios retrieves images for the 3 default categories.
+
+
+
+
+  // Retrieving images for the 3 default categories using axios.
+
   componentDidMount() {
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=statues&per_page=24&page=1&format=json&nojsoncallback=1`)
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=statues&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState( prevState => ({
           ...prevState,
@@ -36,7 +48,11 @@ class App extends Component {
              .catch(error => {
               console.log('Error fetching and parsing data', error);
             });
-      axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=animals&per_page=24&page=1&format=json&nojsoncallback=1`)
+
+
+
+
+      axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=animals&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState( prevState => ({
           ...prevState,
@@ -47,7 +63,11 @@ class App extends Component {
         .catch(error => {
           console.log('Error fetching and parsing data', error);
         });
-      axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=watches&per_page=25&page=1&format=json&nojsoncallback=1`)
+
+
+
+
+      axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=watches&per_page=25&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState( prevState => ({
           ...prevState,
@@ -60,14 +80,20 @@ class App extends Component {
             });
   }
   
-//First, changes loading to true, then
-//uses the query passed up from the search form and retrieves images for that and changes loading back to false.
+
+
+
+
+ // Creating Search Field
+
   performSearch = (query) => {
     this.setState( prevState => ({
       ...prevState,
       loading: true
     }));
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&page=1&format=json&nojsoncallback=1`)
+
+    
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       this.setState( prevState => ({
         ...prevState,
@@ -86,19 +112,21 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Header 
-            cars={this.state.statues}
-            footwears={this.state.animals}
+            statues={this.state.statues}
+            animals={this.state.animals}
             watches={this.state.watches}
             onSearch={this.performSearch}
           />
-           { this.state.loading ? <p><h1>Loading...</h1></p> : 
+           { this.state.loading ? <h1>Loading...</h1> : 
           <Switch>           
             <Route exact path="/" render={ () => <Redirect to='/statues' />} />
-            <Route path="/statues" render={ () => <GalleryForm images={this.state.statues} title={'Statues'} />} />
-            <Route path="/animals" render={ () => <GalleryForm images={this.state.animals} title={'Animals'} />} />
-            <Route path="/watches" render={ () => <GalleryForm images={this.state.watches} title={'Watches'} />} />
-            <Route path="/search" render={ () => <GalleryForm images={this.state.imgs} title={this.state.query} />} />
+            <Route path="/statues" render={ () => <PhotoList images={this.state.statues} title={'Statues'} />} />
+            <Route path="/animals" render={ () => <PhotoList images={this.state.animals} title={'Animals'} />} />
+            <Route path="/watches" render={ () => <PhotoList images={this.state.watches} title={'Watches'} />} />
+            <Route path="/search" render={ () => <PhotoList images={this.state.imgs} title={this.state.query} />} />
+
             {/* if the route is not one of the above routes, go to the 404 page */}
+
             <Route component={NotFound} />
            </Switch> }
         </div>
